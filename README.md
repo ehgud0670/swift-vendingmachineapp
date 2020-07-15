@@ -1,6 +1,11 @@
 # 자판기 앱 step3
 
-## 3. 결과 화면
+## 실행 화면
 
-<img width="931" alt="자판기앱" src="https://user-images.githubusercontent.com/38216027/85565061-be5feb80-b669-11ea-82be-d9b1b7a9e8bd.png">
+> 음료 버튼 클릭 
 
+![beverage_button](https://user-images.githubusercontent.com/38216027/87517217-86245980-c6b9-11ea-9611-69dbeb779ec9.gif)
+
+> 잔고 버튼 클릭
+
+![balance_button](https://user-images.githubusercontent.com/38216027/87517515-e3b8a600-c6b9-11ea-9d17-83b793f15d5d.gif)
