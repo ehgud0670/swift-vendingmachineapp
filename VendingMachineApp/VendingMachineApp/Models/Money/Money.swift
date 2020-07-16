@@ -13,14 +13,14 @@ final class Money {
         static let balanceDidChange = Foundation.Notification.Name("balanceDidChange")
     }
     
-    init(balance: Int = Quantity.zero) {
-        self.balance = balance
-    }
-    
     private var balance: Int {
         didSet {
             NotificationCenter.default.post(name: Notification.balanceDidChange, object: self)
         }
+    }
+    
+    init(balance: Int = Quantity.zero) {
+        self.balance = balance
     }
     
     func subtract(price: Money) {
