@@ -9,6 +9,11 @@
 import UIKit
 
 final class ViewController: UIViewController {
+    //MARK:- IBOutlet
+    @IBOutlet var beverageNumberLabels: [BeverageLabel]!
+    @IBOutlet weak var balanceLabel: BalanceLabel!
+    
+    //MARK:- internal property
     private var vendingMachine = VendingMachine(stock: Stock(), balance: Money())
     private var beverageObserver: NSObjectProtocol?
     private var balanceObsever: NSObjectProtocol?
@@ -54,8 +59,6 @@ final class ViewController: UIViewController {
         ) { [weak self] _ in self?.updateBalanceLabel() }
     }
     
-    @IBOutlet var beverageNumberLabels: [BeverageLabel]!
-    
     @IBAction func beverageButtonDidTouch(_ sender: BeverageButton) {
         guard let berverage = sender.instantiator()?.beverage else { return }
         
@@ -74,7 +77,6 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var balanceLabel: BalanceLabel!
     @IBAction func balanceButtonDidTouch(_ sender: MoneyButton) {
         guard let money = sender.instantiator?.money else { return }
         
