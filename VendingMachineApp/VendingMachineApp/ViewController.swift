@@ -41,7 +41,6 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        balanceLabel.update(currentMoney: vendingMachine.money)
         configureObservers()
     }
     
