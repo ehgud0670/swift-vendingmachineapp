@@ -93,7 +93,7 @@ final class VendingMachineTest: XCTestCase {
                        [dietCola: 2, primiumLatte: 1, cookieCreamMilk: 1])
     }
     
-    func testSell() {
+    func testSell_success() {
         //given
         vendingMachine.receive(insertedMoney: Money(balance: 1500))
         
@@ -104,6 +104,46 @@ final class VendingMachineTest: XCTestCase {
         switch result {
         case .success(let beverage):
             XCTAssertEqual(beverage, cookieCreamMilk)
+        default:
+            break
+        }
+    }
+    
+    func testSell_fail_돈이_부족한_경우() {
+        //given
+        vendingMachine.receive(insertedMoney: Money(balance: 1000))
+        
+        //when
+        let result = vendingMachine.sell(wantedBeverage: cookieCreamMilk)
+        
+        //then
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, SellError.insufficientMoneyError)
+        default:
+            break
+        }
+    }
+    
+    func testSell_fail_해당_음료가_없는_경우() {
+        //given
+        vendingMachine.receive(insertedMoney: Money(balance: 10000))
+        let other = Cantata(
+            milkContentRate: 0.1,
+            sugarContentRate: 0.1,
+            celsius: 50,
+            name: "다른 라떼",
+            volume: 100,
+            price: 1200
+        )
+        
+        //when
+        let result = vendingMachine.sell(wantedBeverage: other)
+        
+        //then
+        switch result {
+        case .failure(let error):
+            XCTAssertEqual(error, SellError.nonExistentBeverageError)
         default:
             break
         }
