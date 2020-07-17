@@ -14,13 +14,15 @@ class Milk: Beverage {
     override init(brand: String,
          name: String,
          volume: Int,
-         price: Int
+         price: Int,
+         manufacturingDate: Date
     ) {
         super.init(
             brand: brand,
             name: name,
             volume: volume,
-            price: price
+            price: price,
+            manufacturingDate: manufacturingDate
         )
         let oneWeekTime = TimeInterval(604800)
         self.expirationDate = manufacturingDate.addingTimeInterval(oneWeekTime)

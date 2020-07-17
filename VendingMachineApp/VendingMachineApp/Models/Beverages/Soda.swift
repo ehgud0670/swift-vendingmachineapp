@@ -19,14 +19,16 @@ class Soda: Beverage {
         brand: String,
         name: String,
         volume: Int,
-        price: Int
+        price: Int,
+        manufacturingDate: Date
     ) {
         self.kiloCalorie = kiloCalorie
         super.init(
             brand: brand,
             name: name,
             volume: volume,
-            price: price
+            price: price,
+            manufacturingDate: manufacturingDate
         )
     }
     

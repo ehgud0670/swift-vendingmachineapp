@@ -23,15 +23,19 @@ final class Cantata: Coffee {
         celsius: Int,
         name: String,
         volume: Int,
-        price: Int
+        price: Int,
+        manufacturingDate: Date = Date()
     ) {
         self.milkContentRate = milkContentRate
         self.sugarContentRate = sugarContentRate
-        super.init(celsius: celsius,
-                   brand: "칸타타",
-                   name: name,
-                   volume: volume,
-                   price: price)
+        super.init(
+            celsius: celsius,
+            brand: "칸타타",
+            name: name,
+            volume: volume,
+            price: price,
+            manufacturingDate: manufacturingDate
+        )
     }
     
     override func hash(into hasher: inout Hasher) {

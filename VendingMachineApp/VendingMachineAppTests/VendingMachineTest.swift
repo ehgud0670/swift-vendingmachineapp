@@ -110,6 +110,7 @@ final class VendingMachineTest: XCTestCase {
     }
     
     func testAdd() {
+        //given
         vendingMachine = VendingMachine(stock: Stock(), balance: Money())
         let otherCookieCreamMilk = HersheyChocolateDrink(
             cacaoContentRate: 0.03,
@@ -117,7 +118,11 @@ final class VendingMachineTest: XCTestCase {
             volume: 235,
             price: 1300
         )
+        
+        //when
         vendingMachine.addToStock(beverage: otherCookieCreamMilk)
+        
+        //then
         vendingMachine.repeatAllBeverages { (beverage) -> (Void) in
             XCTAssertEqual(beverage, otherCookieCreamMilk)
         }
@@ -143,10 +148,21 @@ final class VendingMachineTest: XCTestCase {
     }
     
     func testSearchMilksPassed() {
-        if let date = Date.dateFormatter.date(from: "20200801") {
-            vendingMachine.repeatMilksPassed(expirationDate: date) {
-                XCTAssertEqual($0, cookieCreamMilk)
-            }
+        //given
+        let now = Date()
+        let cookieCreamMilk = HersheyChocolateDrink(
+            cacaoContentRate: 0.03,
+            name: "쿠키앤크림",
+            volume: 235,
+            price: 1300,
+            manufacturingDate: now
+        )
+        vendingMachine = VendingMachine(stock: Stock(beverages: [cookieCreamMilk]), balance: Money())
+        
+        //then
+        let twoWeeksLater = now.addingTimeInterval(TimeInterval(1209600))
+        vendingMachine.repeatMilksPassed(expirationDate: twoWeeksLater) {
+            XCTAssertEqual($0, cookieCreamMilk)
         }
     }
 }

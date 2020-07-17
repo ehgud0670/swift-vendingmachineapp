@@ -19,13 +19,17 @@ final class HersheyChocolateDrink: Milk {
         cacaoContentRate: Double,
         name: String,
         volume: Int,
-        price: Int
+        price: Int,
+        manufacturingDate: Date = Date()
     ) {
         self.cacaoContentRate = cacaoContentRate
-        super.init(brand: "허쉬초콜릿드링크",
-                   name: name,
-                   volume: volume,
-                   price: price)
+        super.init(
+            brand: "허쉬초콜릿드링크",
+            name: name,
+            volume: volume,
+            price: price,
+            manufacturingDate: manufacturingDate
+        )
     }
     
     override func hash(into hasher: inout Hasher) {

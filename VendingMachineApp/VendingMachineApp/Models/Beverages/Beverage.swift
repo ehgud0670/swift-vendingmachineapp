@@ -19,13 +19,14 @@ class Beverage: Hashable {
         brand: String,
         name: String,
         volume: Int,
-        price: Int
+        price: Int,
+        manufacturingDate: Date
     ) {
         self.brand = brand
         self.name = name
         self.volume = volume
         self.price = Money(balance: price)
-        self.manufacturingDate = Date()
+        self.manufacturingDate = manufacturingDate
     }
     
     func hash(into hasher: inout Hasher) {

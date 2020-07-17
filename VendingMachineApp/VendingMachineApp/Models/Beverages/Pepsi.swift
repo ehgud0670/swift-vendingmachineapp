@@ -25,7 +25,8 @@ final class Pepsi: Soda {
         kiloCalorie: Int,
         name: String,
         volume: Int,
-        price: Int
+        price: Int,
+        manufacturingDate: Date = Date()
     ) {
         self.package = package
         super.init(
@@ -33,7 +34,8 @@ final class Pepsi: Soda {
             brand: "펩시",
             name: name,
             volume: volume,
-            price: price
+            price: price,
+            manufacturingDate: manufacturingDate
         )
     }
     
