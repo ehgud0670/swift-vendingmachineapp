@@ -22,6 +22,7 @@ final class VendingMachineTest: XCTestCase {
         volume: 175,
         price: 1500
     )
+    
     private let dietCola = Pepsi(
         package: Pepsi.Package.can,
         kiloCalorie: 80,
