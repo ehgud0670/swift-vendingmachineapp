@@ -9,6 +9,10 @@
 import Foundation
 
 class Coffee: Beverage {
+    private enum Quantity {
+        static let minHotCelsius = 60
+    }
+    
     private let celsius: Int
     
     init(

@@ -9,6 +9,11 @@
 import Foundation
 
 final class Cantata: Coffee {
+    private enum Quantity {
+        static let minRate: Double = 0
+        static let maxRate: Double = 1
+    }
+    
     private let milkContentRate: Double
     private let sugarContentRate: Double
     

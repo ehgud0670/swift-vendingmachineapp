@@ -9,6 +9,9 @@
 import Foundation
 
 class Soda: Beverage {
+    private enum Quantity {
+        static let maxLowKiloCalorie = 100
+    }
     private let kiloCalorie: Int
     
     init(

@@ -9,6 +9,10 @@
 import Foundation
 
 final class HersheyChocolateDrink: Milk {
+    private enum Quantity {
+        static let minHighCacaoRate = 0.05
+    }
+    
     private let cacaoContentRate: Double
     
     init(

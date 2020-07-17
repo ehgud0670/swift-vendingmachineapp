@@ -13,6 +13,10 @@ final class Money {
         static let balanceDidChange = Foundation.Notification.Name("balanceDidChange")
     }
     
+    private enum Quantity {
+        static let zero = 0
+    }
+    
     private var balance: Int {
         didSet {
             NotificationCenter.default.post(name: Notification.balanceDidChange, object: self)
