@@ -164,6 +164,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A25560F24C166B80014D5E4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5A7EFBC1241631860018710C /* Date.swift */,
+				5A7EFBCB241658C30018710C /* Quantity.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		5A349101249BAEF700A16D90 /* BeverageButtons */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +262,7 @@
 		5A91FCCB240FCDFB00884D64 /* VendingMachineApp */ = {
 			isa = PBXGroup;
 			children = (
+				5A25560F24C166B80014D5E4 /* Utils */,
 				5A834187241E115F00F20FAA /* Views */,
 				5A91FCFC240FD6B700884D64 /* Models */,
 				5A91FCCC240FCDFB00884D64 /* AppDelegate.swift */,
@@ -292,8 +302,6 @@
 				5ACEDDA724A3865F001F9933 /* Money */,
 				5A8341722419002B00F20FAA /* Beverages */,
 				5A91FCFD240FD6DE00884D64 /* VendingMachine.swift */,
-				5A7EFBC1241631860018710C /* Date.swift */,
-				5A7EFBCB241658C30018710C /* Quantity.swift */,
 				5ACEDD9224A31ECD001F9933 /* Stock.swift */,
 			);
 			path = Models;
