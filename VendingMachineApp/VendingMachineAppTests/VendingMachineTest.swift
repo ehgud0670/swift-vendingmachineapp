@@ -10,8 +10,11 @@ import XCTest
 @testable import VendingMachineApp
 
 final class VendingMachineTest: XCTestCase {
-    var vendingMachine: VendingMachine!
-    let primiumLatte = Cantata(
+    private var vendingMachine: VendingMachine!
+    private var money: Money!
+    private var stock: Stock!
+    
+    private let primiumLatte = Cantata(
         milkContentRate: 0.15,
         sugarContentRate: 0.05,
         celsius: 65,
@@ -19,7 +22,7 @@ final class VendingMachineTest: XCTestCase {
         volume: 175,
         price: 1500
     )
-    let dietCola = Pepsi(
+    private let dietCola = Pepsi(
         package: Pepsi.Package.can,
         kiloCalorie: 80,
         name: "다이어트 콜라",
@@ -27,7 +30,7 @@ final class VendingMachineTest: XCTestCase {
         price: 1200
     )
     
-    let dietCola2 = Pepsi(
+    private let dietCola2 = Pepsi(
         package: Pepsi.Package.can,
         kiloCalorie: 80,
         name: "다이어트 콜라",
@@ -35,7 +38,7 @@ final class VendingMachineTest: XCTestCase {
         price: 1200
     )
     
-    let cookieCreamMilk = HersheyChocolateDrink(
+    private let cookieCreamMilk = HersheyChocolateDrink(
         cacaoContentRate: 0.03,
         name: "쿠키앤크림",
         volume: 235,
@@ -44,25 +47,34 @@ final class VendingMachineTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        money = Money()
+        stock = Stock(beverages: [primiumLatte, dietCola, cookieCreamMilk, dietCola2])
         vendingMachine = VendingMachine(
-            stock: Stock(beverages: [primiumLatte, dietCola, cookieCreamMilk, dietCola2]),
-            balance: Money()
+            stock: stock,
+            balance: money
         )
     }
     
     override func tearDown() {
+        money = nil
+        stock = nil
         vendingMachine = nil
         super.tearDown()
     }
     
     func testReceive() {
+        //given
         let money = Money(balance: 2000)
+        
+        //when
         vendingMachine.receive(insertedMoney: money)
-        XCTAssertEqual(vendingMachine.money, money)
+        
+        //then
+        XCTAssertEqual(self.money, money)
     }
     
     func testCurrentMoney() {
-        XCTAssertEqual(vendingMachine.money, Money())
+        XCTAssertEqual(self.money, Money())
     }
     
     func testStockByKind() {
@@ -75,14 +87,26 @@ final class VendingMachineTest: XCTestCase {
     
     func testSellableBeverages() {
         vendingMachine.receive(insertedMoney: Money(balance: 1500))
+        
         let sellableBeverages = vendingMachine.sellableBeverages()
         XCTAssertEqual(sellableBeverages,
                        [dietCola: 2, primiumLatte: 1, cookieCreamMilk: 1])
     }
     
     func testSell() {
+        //given
         vendingMachine.receive(insertedMoney: Money(balance: 1500))
-        vendingMachine.sell(wantedBeverage: cookieCreamMilk)
+        
+        //when
+        let result = vendingMachine.sell(wantedBeverage: cookieCreamMilk)
+        
+        //then
+        switch result {
+        case .success(let beverage):
+            XCTAssertEqual(beverage, cookieCreamMilk)
+        default:
+            break
+        }
     }
     
     func testAdd() {
@@ -103,12 +127,12 @@ final class VendingMachineTest: XCTestCase {
         vendingMachine.receive(insertedMoney: Money(balance: 1500))
         let result =  vendingMachine.sell(wantedBeverage: cookieCreamMilk)
         switch result {
-        case .failure(let error):
-            print(error.localizedDescription)
         case .success(let beverage):
             vendingMachine.repeatSalesLog {
                 XCTAssertEqual($0, beverage)
             }
+        default:
+            break
         }
     }
     
@@ -119,7 +143,7 @@ final class VendingMachineTest: XCTestCase {
     }
     
     func testSearchMilksPassed() {
-        if let date = Date.dateFormatter.date(from: "20191201") {
+        if let date = Date.dateFormatter.date(from: "20200801") {
             vendingMachine.repeatMilksPassed(expirationDate: date) {
                 XCTAssertEqual($0, cookieCreamMilk)
             }

@@ -31,7 +31,7 @@ final class VendingMachine {
     }
     
     @discardableResult
-    func sell(wantedBeverage: Beverage) -> Result<Beverage,SellError> {
+    func sell(wantedBeverage: Beverage) -> Result<Beverage, SellError> {
         guard money >= wantedBeverage.price else {
             return .failure(.insufficientMoneyError)
         }
